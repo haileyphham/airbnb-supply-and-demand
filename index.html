@@ -6,19 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Airbnb Supply and Demand Analysis</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
 </head>
+
 <header>
     <h1>Airbnb Supply and Demand Analysis</h1>
     <p>An analysis of the supply and demand in Airbnb rental listings in Boston, 
         along with the impacts occupancy taxes on the short-term rental market enacted on July 1, 2019.</p>
-    <p>The Massachusetts state legislature enacted a room occupancy excise tax on short-term rentals of 31 days or less. 
-        The tax applies to hotels, motels, bed and breakfasts, lodging houses, and other short-term rentals including Airbnb rentals. 
-        The study begins by processing Airbnb data, focusing on entire homes and apartments rented on weekends. 
-        Using this filtered dataset, I constructed demand and supply curves by binning prices and calculating quantities demanded and supplied at different price points.</p>
-    
 </header>
-<body>
     
+<body>
+
+    <div id="map"></div>
+    <div class="caption">
+        <p>The Massachusetts state legislature enacted a room occupancy excise tax on short-term rentals of 31 days or less. 
+            The tax applies to hotels, motels, bed and breakfasts, lodging houses, and other short-term rentals including Airbnb rentals. 
+            The study begins by processing Airbnb data, focusing on entire homes and apartments rented on weekends. 
+            Using this filtered dataset, I constructed demand and supply curves by binning prices and calculating quantities demanded and supplied at different price points.</p>
+    </div>
     <div class="chart">
         <h2>Demand Curve (Pre-Tax)</h2>
         <iframe src="charts/demand_curve.html" width="100%" height="600px"></iframe>
@@ -47,5 +54,7 @@
     <div class="caption">
     <p>This chart illustrates the effect of the 14.95% occupancy tax on the demand curve. The tax shifts the demand curve leftward, reducing the quantity demanded at each price. It also shows how the post-tax equilibrium results in a lower quantity demanded and a higher price for consumers.</p>
     </div>
+
+    <script src="map.js"></script>
 </body>
 </html>

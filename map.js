@@ -1,31 +1,35 @@
-// map.js
 
-// Function to load the CSV data and plot markers
-function loadCSV() {
-    Papa.parse('listings.csv', {
-        download: true,
-        header: true, // Treats the first row as header
-        dynamicTyping: true,
-        complete: function(results) {
-            // Initialize the map
-            var map = L.map('map').setView([42.3601, -71.0589], 13); // Center map on Boston
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
+var map = L.map('map').setView([42.3601, -71.0589], 12); 
 
-            // Loop through each row of the CSV and plot markers
-            results.data.forEach(function(row) {
-                // Clean data: Check if latitude and longitude are valid
-                if (row.latitude && row.longitude && !isNaN(row.latitude) && !isNaN(row.longitude)) {
-                    // Create a marker for each valid entry
-                    L.marker([row.latitude, row.longitude])
-                        .addTo(map)
-                        .bindPopup("<b>" + row.name + "</b><br>Latitude: " + row.latitude + "<br>Longitude: " + row.longitude);
-                }
-            });
-        }
-    });
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+//random 100 locations
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]]; 
+    }
 }
 
-// Call the function to load CSV and render map
-loadCSV();
+
+d3.csv('simplified_listings.csv').then(function(data) {
+    shuffle(data);
+    const sampleData = data.slice(0, 100);
+
+    sampleData.forEach(function(d) {
+        var lat = parseFloat(d.latitude);
+        var lon = parseFloat(d.longitude);
+        
+        if (!isNaN(lat) && !isNaN(lon)) { 
+        
+            L.marker([lat, lon])
+                .addTo(map)
+                .bindPopup(`<strong>${d.name}</strong><br><a href="${d.listing_url}" target="_blank">View Listing</a>`);
+        }
+    });
+}).catch(function(error) {
+    console.error('Error loading CSV data:', error);
+});

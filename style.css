@@ -16,7 +16,6 @@
     box-sizing: border-box; 
 }
 
-
 body {
     background-color: #f4f4f4; 
     color: #514d46;  
@@ -42,7 +41,6 @@ header p {
     padding-right: 300px;
 }
 
-
 .chart {
     width: 60%; 
     margin: 20px auto; 
@@ -51,7 +49,6 @@ header p {
     padding: 20px; 
     border-color:#514d46;
 }
-
 
 .chart h2 {
     font-size: 24px; 
@@ -73,4 +70,20 @@ iframe {
     border: none; 
     border-radius: 8px; 
     display: block;  
+
+}
+
+#map {
+    height: 400px;
+    width:60%;
+    margin: 20px auto; 
+    background-color: #fff; 
+    border-radius: 8px; 
+    padding: 20px; 
+
+}
+
+.leaflet-container {
+    border: 2px solid #ecf0f1;
+    border-radius: 10px;
 }
